@@ -30,7 +30,7 @@ class UserEditForm(forms.ModelForm):
         model = User
         fields = ['username', 'first_name', 'email']
     def clean_email(self):
-        data = self.exclude['email']
+        data = self.cleaned_data['email']
         qs = User.objects.exclude(id=self.instance.id).filter(email=data)
         if qs.exists():
             raise forms.ValidationError('Problems with e-mail')
